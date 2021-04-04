@@ -146,7 +146,7 @@ class ListClients {
         return returningInt;
     }
 
-    int* findAll(char *type, int value) {
+    int* findAll(int value) {
         bool ch[count];
         int cells = 0;
             for (int i = 0; i < count; i++) {
