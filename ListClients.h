@@ -103,6 +103,16 @@ class ListClients {
         }
     }
 
+    int find(int value) {
+        for (int i = 0; i < count; i++) {
+            if (free[i] == true) {
+                if (list[i].getDiscount() == value) {
+                    return i
+                }
+            }
+        }
+        return NULL;
+    }
 
     Client operator[](int value) {
         if (free[value] != false) {
