@@ -5,37 +5,29 @@ class ListClients {
     public:
     ListClients(int value) {
         list = new Client[value];
-        free = new int[value];
+        free = new bool[value];
         this->count = value;
     }
 
         int checkList() {
         countFreeList = 0;
         for(int i = 0; i < count; i++) {
-            if (list[i].getFio() == "0") {
+            if (free[i] == false) {
                 countFreeList += 1;
-                free[i] = 1;
             }
-            else
-            free[i] = 0;
-        }
         return (count - countFreeList);
+    }
     }
 
     void add(Client &value) {
         this->checkList();
         for(int i = 0; i < count; i++) {
-            if (free[i] == 1) {
+            if (free[i] == false) {
                 list[i] = value;
-                free[i] = 0;
+                free[i] = true;
                 return;
             }
         }
-        if (countFree != count) {
-            list[countFree] = value;
-            this->countFree += 1;
-        }
-        else
             throw "Ячейки в памяти закончились!";
     }
     void add(char *name, char *adress, int discount) {
@@ -106,7 +98,7 @@ class ListClients {
     }
     private:
     Client *list;
-    int *free;
+    bool *free;
     int countFree = 0;
     int count;
     int countFreeList;
