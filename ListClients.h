@@ -114,6 +114,39 @@ class ListClients {
         return NULL;
     }
 
+    int* findAll(char *type, char *value) {
+        bool ch[count];
+        int cells = 0;
+        if (type == "fio") {
+            for (int i = 0; i < count; i++) {
+                if (free[i] == true) {
+                    if (list[i].getFio() == value) {
+                        ch[i] = true;
+                        cells += 1;
+                    }
+                }
+            }
+        }
+        if (type == "adress") {
+            for (int i = 0; i < count; i++) {
+                if (free[i] == true) {
+                    if (list[i].getAdress() == value) {
+                        ch[i] = true;
+                        cells += 1;
+                    }
+                }
+            }
+        }
+        int *returningInt = new int[cells];
+        for(int i = 0; i < count; i++) {
+            if (ch[i] == true) {
+                returningInt[i] = i;
+            }
+        }
+        return returningInt;
+    }
+
+
     Client operator[](int value) {
         if (free[value] != false) {
             return list[value];
