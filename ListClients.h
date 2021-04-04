@@ -107,7 +107,7 @@ class ListClients {
         for (int i = 0; i < count; i++) {
             if (free[i] == true) {
                 if (list[i].getDiscount() == value) {
-                    return i
+                    return i;
                 }
             }
         }
