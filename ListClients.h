@@ -61,7 +61,7 @@ class ListClients {
         this->checkList();
         for(int i = 0; i < count; i++) {
             if (free[i] == 1) {
-                char *name, *adress;
+                char name, adress;
                 int discount;
                 cout << "Введите имя клиента: ";
                 cin >> name;
@@ -69,22 +69,22 @@ class ListClients {
                 cin >> adress;
                 cout << "Введите скидку клиента: ";
                 cin >> discount;
-                Client NewClient = Client(name, adress, discount);
+                Client NewClient = Client(&name, &adress, discount);
                 list[i] = NewClient;
                 free[i] = 0;
                 return;
             }
         }
         if (countFree != count) {
-                char *name, *adress;
+                char name, adress;
                 int discount;
                 cout << "Введите имя клиента: ";
-                cin >> *name;
+                cin >> name;
                 cout << "Введите адресс клиента: ";
-                cin >> *adress;
+                cin >> adress;
                 cout << "Введите скидку клиента: ";
                 cin >> discount;
-                Client NewClient = Client(name, adress, discount);
+                Client NewClient = Client(&name, &adress, discount);
         list[countFree] = NewClient;
         this->countFree += 1;
     }
@@ -101,7 +101,7 @@ class ListClients {
     void showList() {
         for(int i = 0; i < count; i++) {
             list[i].ShowClient();
-            cout << "------------------------";
+            cout << "------------------------" << endl;
         }
     }
     private:
