@@ -44,6 +44,12 @@ class Client {
             return true;
         return false;
     }
+
+    void operator=(Client &value) {
+        fio = value.getFio();
+        adress = value.getAdress();
+        discount = value.getDiscount();
+    }
     private:
     char *fio;
     char *adress;
