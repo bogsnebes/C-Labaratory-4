@@ -80,6 +80,30 @@ class ListClients {
         }
     }
 
+    int find(char *type, char *value) {
+        if (type == "fio") {
+            for (int i = 0; i < count; i++) {
+                if (free[i] == true) {
+                    if (list[i].getFio() == value) {
+                        return i;
+                    }
+                }
+            }
+            return NULL;
+        }
+        if (type == "adress") {
+            for (int i = 0; i < count; i++) {
+                if (free[i] == true) {
+                    if (list[i].getAdress() == value) {
+                        return i;
+                    }
+                }
+            }
+            return NULL;
+        }
+    }
+
+
     Client operator[](int value) {
         if (free[value] != false) {
             return list[value];
