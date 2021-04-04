@@ -66,7 +66,8 @@ class ListClients {
         setlocale(0, "");
         if (value > (sizeof(list) - 1) and value < 0)
             throw "Данной ячейки нет в массиве";
-        list[value] = Client(strdup("0"), strdup("0"), 0);
+        Client NewClient = Client(strdup("0"), strdup("0"), 0);
+        list[value] = NewClient;
         free[value] = false;
     }
 
@@ -78,6 +79,15 @@ class ListClients {
             }
         }
     }
+
+    Client operator[](int value) {
+        if (free[value] != false) {
+            return list[value];
+        }
+        throw "The cell is empty";
+    }
+
+
     private:
     Client *list;
     bool *free;
