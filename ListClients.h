@@ -4,14 +4,14 @@
 class ListClients {
     public:
     ListClients(int value) {
-        Client *list = new Client[value];
-        int *free = new int[value];
+        list = new Client[value];
+        free = new int[value];
         this->count = value;
     }
 
         int checkList() {
         countFreeList = 0;
-        for(int i = 0; i < sizeof(list); i++) {
+        for(int i = 0; i < count; i++) {
             if (list[i].getFio() == "0") {
                 countFreeList += 1;
                 free[i] = 1;
@@ -64,9 +64,9 @@ class ListClients {
                 char *name, *adress;
                 int discount;
                 cout << "Введите имя клиента: ";
-                cin >> *name;
+                cin >> name;
                 cout << "Введите адресс клиента: ";
-                cin >> *adress;
+                cin >> adress;
                 cout << "Введите скидку клиента: ";
                 cin >> discount;
                 Client NewClient = Client(name, adress, discount);
@@ -76,7 +76,7 @@ class ListClients {
             }
         }
         if (countFree != count) {
-                        char *name, *adress;
+                char *name, *adress;
                 int discount;
                 cout << "Введите имя клиента: ";
                 cin >> *name;
