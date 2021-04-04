@@ -25,7 +25,7 @@ class ListClients {
     void add(Client &value) {
         this->checkList();
         for(int i = 0; i < count; i++) {
-            if (free[i] = 1) {
+            if (free[i] == 1) {
                 list[i] = value;
                 free[i] = 0;
                 return;
@@ -41,7 +41,7 @@ class ListClients {
     void add(char *name, char *adress, int discount) {
         this->checkList();
         for(int i = 0; i < count; i++) {
-            if (free[i] = 1) {
+            if (free[i] == 1) {
                 Client NewClient = Client(name, adress, discount);
                 list[i] = NewClient;
                 free[i] = 0;
@@ -60,7 +60,7 @@ class ListClients {
         setlocale(0, "");
         this->checkList();
         for(int i = 0; i < count; i++) {
-            if (free[i] = 1) {
+            if (free[i] == 1) {
                 char *name, *adress;
                 int discount;
                 cout << "Введите имя клиента: ";
