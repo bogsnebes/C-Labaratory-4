@@ -34,9 +34,9 @@ class Client {
     }
     void ShowClient() {
         setlocale(0, "");
-        cout << "Имя клиента:" << getFio() << endl;
-        cout << "Адрес клиента:" << getAdress() << endl;
-        cout << "Скидка клиента:" << getDiscount() << endl;
+        cout << "Name client:" << getFio() << endl;
+        cout << "Adress client:" << getAdress() << endl;
+        cout << "Discount client:" << getDiscount() << endl;
     }
     ~Client() {}
     bool operator==(Client &value) {

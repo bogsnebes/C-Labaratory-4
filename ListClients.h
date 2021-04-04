@@ -46,12 +46,13 @@ class ListClients {
             if (free[i] == false) {
                 char name, adress;
                 int discount;
-                cout << "Введите имя клиента: ";
+                cout << "Name client: ";
                 cin >> name;
-                cout << "Введите адресс клиента: ";
+                cout << "\nAdress client: ";
                 cin >> adress;
-                cout << "Введите скидку клиента: ";
+                cout << "\nDiscount client: ";
                 cin >> discount;
+                cout << "\n";
                 Client NewClient = Client(&name, &adress, discount);
                 list[i] = NewClient;
                 free[i] = true;

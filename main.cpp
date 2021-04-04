@@ -8,12 +8,12 @@ using namespace std;
 int main() {
     setlocale(0, "");
     ListClients list = ListClients(3);
-    Client object = Client(strdup("Кантик"), strdup("Москва"), 23);
+    Client object = Client(strdup("Cantik"), strdup("Moscow"), 23);
     list.add(object);
-    list.add(strdup("Богдан"), strdup("Москва"), 25);
+    list.add(strdup("Bogdan"), strdup("Moscow"), 25);
     list.addKey();
     list.deleteClient(0);
-    cout << "Заполненость списка: " << list.checkList();
+    cout << "\nList: " << list.checkList() << endl;
     list.showList();
     system("pause");
 }
