@@ -20,7 +20,6 @@ class ListClients {
     }
 
     void add(Client &value) {
-        this->checkList();
         for(int i = 0; i < count; i++) {
             if (free[i] == false) {
                 list[i] = value;
@@ -31,28 +30,20 @@ class ListClients {
             throw "Ячейки в памяти закончились!";
     }
     void add(char *name, char *adress, int discount) {
-        this->checkList();
         for(int i = 0; i < count; i++) {
-            if (free[i] == 1) {
+            if (free[i] == false) {
                 Client NewClient = Client(name, adress, discount);
                 list[i] = NewClient;
-                free[i] = 0;
+                free[i] = true;
                 return;
             }
         }
-        if (countFree != count) {
-            Client NewClient = Client(name, adress, discount);
-            list[countFree] = NewClient;
-            this->countFree += 1;
-        }
-        else
             throw "Ячейки в памяти закончились!";
     }
     void addKey() {
         setlocale(0, "");
-        this->checkList();
         for(int i = 0; i < count; i++) {
-            if (free[i] == 1) {
+            if (free[i] == false) {
                 char name, adress;
                 int discount;
                 cout << "Введите имя клиента: ";
@@ -63,37 +54,27 @@ class ListClients {
                 cin >> discount;
                 Client NewClient = Client(&name, &adress, discount);
                 list[i] = NewClient;
-                free[i] = 0;
+                free[i] = true;
                 return;
             }
         }
-        if (countFree != count) {
-                char name, adress;
-                int discount;
-                cout << "Введите имя клиента: ";
-                cin >> name;
-                cout << "Введите адресс клиента: ";
-                cin >> adress;
-                cout << "Введите скидку клиента: ";
-                cin >> discount;
-                Client NewClient = Client(&name, &adress, discount);
-        list[countFree] = NewClient;
-        this->countFree += 1;
-    }
-            else
             throw "Ячейки в памяти закончились!";
         }
+
     void deleteClient(int value) {
         setlocale(0, "");
         if (value > (sizeof(list) - 1) and value < 0)
             throw "Данной ячейки нет в массиве";
         list[value] = Client(strdup("0"), strdup("0"), 0);
+        free[value] = false;
     }
 
     void showList() {
         for(int i = 0; i < count; i++) {
+            if (free[i] == true) {
             list[i].ShowClient();
             cout << "------------------------" << endl;
+            }
         }
     }
     private:
