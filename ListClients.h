@@ -167,10 +167,10 @@ class ListClients {
     }
 
     Client operator[](int value) {
-        if (free[value] != false) {
-            return list[value];
+        if (free[value] == false) {
+            throw "The cell is empty";
         }
-        throw "The cell is empty";
+        return list[value];
     }
 
 
