@@ -46,9 +46,9 @@ class Client {
     }
 
     void operator=(Client &value) {
-        fio = value.getFio();
-        adress = value.getAdress();
-        discount = value.getDiscount();
+        this->fio = value.getFio();
+        this->adress = value.getAdress();
+        this->discount = value.getDiscount();
     }
     private:
     char *fio;
