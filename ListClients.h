@@ -182,9 +182,9 @@ class ListClients {
         if (type == 1) {
             for (int i = 0; i <= (count - 2); i++) {
                 for (int j = 0; j <= (count - i - 2); j++) {
-                    char* name_1 = list[j].getFio();
-                    char* name_2 = list[j + 1].getFio();
-                    if (*name_1 > *name_2) {
+                    char name_1[256]{*(list[j].getFio())};
+                    char name_2[256]{*(list[j + 1].getFio())};
+                    if (int(name_1[0]) < int(name_2[0])) {
                         Client buffer = list[j];
                         bool bufferBool = free[j];
                         list[i] = list[j + 1];
@@ -192,21 +192,49 @@ class ListClients {
                         free[j] = free[j + 1];
                         free[j + 1] = free[j];
                     }
+                    else if (int(name_1[0]) == int(name_2[0])) {
+                        for (int h = 0; h < 256; h++) {
+                            if (int(name_1[h]) < int(name_2[h])) {
+                                Client buffer = list[j];
+                                bool bufferBool = free[j];
+                                list[i] = list[j + 1];
+                                list[j + 1] = buffer;
+                                free[j] = free[j + 1];
+                                free[j + 1] = free[j];
+                                break;
+                            }
+                        }
+                        
+                    }
                 }
             }
         }
         else if (type == 2) {
             for (int i = 0; i <= (count - 2); i++) {
                 for (int j = 0; j <= (count - i - 2); j++) {
-                    char* name_1 = list[j].getAdress();
-                    char* name_2 = list[j + 1].getAdress();
-                    if (*name_1 > *name_2) {
+                    char name_1[256]{*(list[j].getAdress())};
+                    char name_2[256]{*(list[j + 1].getAdress())};
+                    if (int(name_1[0]) < int(name_2[0])) {
                         Client buffer = list[j];
                         bool bufferBool = free[j];
                         list[i] = list[j + 1];
                         list[j + 1] = buffer;
                         free[j] = free[j + 1];
                         free[j + 1] = free[j];
+                    }
+                    else if (int(name_1[0]) == int(name_2[0])) {
+                        for (int h = 0; h < 256; h++) {
+                            if (int(name_1[h]) < int(name_2[h])) {
+                                Client buffer = list[j];
+                                bool bufferBool = free[j];
+                                list[i] = list[j + 1];
+                                list[j + 1] = buffer;
+                                free[j] = free[j + 1];
+                                free[j + 1] = free[j];
+                                break;
+                            }
+                        }
+                        
                     }
                 }
             }
