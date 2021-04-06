@@ -6,6 +6,11 @@ class ListClients {
     ListClients(int value) {
         list = new Client[value];
         free = new bool[value];
+        for (int i = 0; i < value; i++) {
+            free[i] = false;
+            Client NewClient = Client(_strdup("0"), _strdup("0"), -1);
+            list[i] = NewClient;
+        }
         this->count = value;
     }
 
@@ -66,7 +71,7 @@ class ListClients {
         setlocale(0, "");
         if (value > (sizeof(list) - 1) and value < 0)
             throw "Данной ячейки нет в массиве";
-        Client NewClient = Client(strdup("0"), strdup("0"), 0);
+        Client NewClient = Client(_strdup("0"), _strdup("0"), -1);
         list[value] = NewClient;
         free[value] = false;
     }
@@ -80,21 +85,23 @@ class ListClients {
         }
     }
 
-    int find(char *type, char *value) {
-        if (type == "fio") {
+    int find(int type, char *value) {
+        if (type == 1) {
             for (int i = 0; i < count; i++) {
                 if (free[i] == true) {
-                    if (list[i].getFio() == value) {
+                    char* name = list[i].getFio();
+                    if (*name == *value) {
                         return i;
                     }
                 }
             }
             return NULL;
         }
-        if (type == "adress") {
+        if (type == 2) {
             for (int i = 0; i < count; i++) {
                 if (free[i] == true) {
-                    if (list[i].getAdress() == value) {
+                    char* name = list[i].getAdress();
+                    if (*name == *value) {
                         return i;
                     }
                 }
@@ -114,23 +121,28 @@ class ListClients {
         return NULL;
     }
 
-    int* findAll(char *type, char *value) {
-        bool ch[count];
+    int* findAll(int type, char *value) {
+        bool *ch = new bool[count];
         int cells = 0;
-        if (type == "fio") {
+        if (type == 1) {
             for (int i = 0; i < count; i++) {
                 if (free[i] == true) {
-                    if (list[i].getFio() == value) {
+                    char* name = list[i].getFio();
+                    if (*name == *value) {
                         ch[i] = true;
                         cells += 1;
+                    }
+                    else {
+                        ch[i] = false;
                     }
                 }
             }
         }
-        if (type == "adress") {
+        if (type == 2) {
             for (int i = 0; i < count; i++) {
                 if (free[i] == true) {
-                    if (list[i].getAdress() == value) {
+                    char* name = list[i].getAdress();
+                    if (*name == *value) {
                         ch[i] = true;
                         cells += 1;
                     }
@@ -147,7 +159,7 @@ class ListClients {
     }
 
     int* findAll(int value) {
-        bool ch[count];
+        bool *ch = new bool[count];
         int cells = 0;
             for (int i = 0; i < count; i++) {
                 if (free[i] == true) {
@@ -166,9 +178,60 @@ class ListClients {
         return returningInt;
     }
 
+    void sortList(int type) {
+        if (type == 1) {
+            for (int i = 0; i <= (count - 2); i++) {
+                for (int j = 0; j <= (count - i - 2); j++) {
+                    char* name_1 = list[j].getFio();
+                    char* name_2 = list[j + 1].getFio();
+                    if (*name_1 > *name_2) {
+                        Client buffer = list[j];
+                        bool bufferBool = free[j];
+                        list[i] = list[j + 1];
+                        list[j + 1] = buffer;
+                        free[j] = free[j + 1];
+                        free[j + 1] = free[j];
+                    }
+                }
+            }
+        }
+        else if (type == 2) {
+            for (int i = 0; i <= (count - 2); i++) {
+                for (int j = 0; j <= (count - i - 2); j++) {
+                    char* name_1 = list[j].getAdress();
+                    char* name_2 = list[j + 1].getAdress();
+                    if (*name_1 > *name_2) {
+                        Client buffer = list[j];
+                        bool bufferBool = free[j];
+                        list[i] = list[j + 1];
+                        list[j + 1] = buffer;
+                        free[j] = free[j + 1];
+                        free[j + 1] = free[j];
+                    }
+                }
+            }
+        }
+        else if (type == 3)
+        {
+            for (int i = 0; i <= (count - 2); i++) {
+                for (int j = 0; j <= (count - i - 2); j++) {
+                    if (list[j].getDiscount() < list[j + 1].getDiscount()) {
+                        Client buffer = list[j];
+                        bool bufferBool = free[j];
+                        list[j] = list[j + 1];
+                        list[j + 1] = buffer;
+                        free[j] = free[j + 1];
+                        free[j + 1] = free[j];
+                    }
+                }
+            }
+        }
+    }
+
     Client operator[](int value) {
         if (free[value] == false) {
-            throw "The cell is empty";
+            Client NewClient = Client(_strdup("0"), _strdup("0"), 0);
+            return NewClient;
         }
         return list[value];
     }
